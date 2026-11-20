@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>HerdLedger · Cattle records, breakevens & hedges in one place</title>
+<meta name="description" content="HerdLedger tracks your cattle by lot, figures breakevens and profit against the market, and keeps your futures, options and LRP in the same picture. Plans from $4.99/month.">
+<meta name="theme-color" content="#1f3d2b">
+<link rel="icon" href="img/logo.svg" type="image/svg+xml">
+<link rel="stylesheet" href="css/styles.css">
+</head><body class="site">
+<header class="site-nav">
+  <a href="#" class="brand"><img src="img/logo.svg" width="34" height="34" alt=""><span>HerdLedger</span></a>
+  <nav><a href="#features">Features</a><a href="#pricing">Pricing</a><a href="app.html" class="btn sm primary">Open the app</a></nav>
+</header>
+
+<section class="hero">
+  <div class="hero-txt">
+    <p class="eyebrow">For cow-calf, backgrounding & feedyard operators</p>
+    <h1>Know what every pen is worth — before the sale barn does.</h1>
+    <p class="lede">HerdLedger keeps your cattle books by lot, adds up every feed and vet bill, and checks your breakeven against tonight's futures close. Your hedges and LRP sit right beside the cattle they protect.</p>
+    <div class="row wrap"><a class="btn primary lg" href="app.html">Try the free demo</a><a class="btn lg ghost" href="#pricing">See pricing</a></div>
+    <p class="muted tiny">No card, no signup. The demo runs in your browser with a sample operation you can load in one tap.</p>
+  </div>
+  <div class="hero-art" aria-hidden="true">
+    <div class="phone"><img src="img/hero.png" alt="" onerror="this.parentNode.classList.add('noimg')"><div class="ph-fallback">
+      <div class="kpi"><span>Equity</span><b class="pos">+$84,210</b></div><div class="kpi"><span>Head on hand</span><b>288</b></div><div class="kpi"><span>Breakeven</span><b>$318.40</b></div></div></div>
+  </div>
+</section>
+
+<section id="features" class="features">
+  <h2>Everything between the purchase ticket and the sale check</h2>
+  <div class="fgrid">
+    <div class="f"><h3>🐂 Lots, not spreadsheets</h3><p>Log head, in-weight and price by the cwt or by the head. HerdLedger estimates today's weight from your gain and tracks death loss and closed-out lots.</p></div>
+    <div class="f"><h3>🧾 Every cost, per head & per cwt</h3><p>Feed, yardage, vet, freight, interest and commission roll into a cost basis and cost of gain. Project what it'll take to reach your target weight or sale date.</p></div>
+    <div class="f"><h3>📈 Breakeven vs. the board</h3><p>Each lot is valued at the futures close plus your local basis, or your own cash bid, so you can see profit or loss pen by pen.</p></div>
+    <div class="f"><h3>🛡️ Hedges in the same picture</h3><p>Futures, puts and calls, and LRP endorsements are marked to the latest settlement, with a running tally of how much of your cattle is protected.</p></div>
+    <div class="f"><h3>📊 Equity you can show the bank</h3><p>A snapshot is saved every day you open the app, and you can record one any time. Watch the trend and print a clean summary for your lender.</p></div>
+    <div class="f"><h3>📤 Your data, your way</h3><p>Printable lot and operation reports, CSV export for your accountant, and a one-click backup file.</p></div>
+  </div>
+  <p class="muted tiny center">Market prices are end-of-day / delayed settlements for live cattle, feeder cattle and corn, updated each weekday evening. HerdLedger does not show real-time quotes.</p>
+</section>
+
+<section id="pricing" class="pricing">
+  <h2>Straightforward pricing for working outfits.</h2>
+  <p class="lede center" id="trial-line"></p>
+  <div class="plans" id="plans"></div>
+  <p class="muted tiny center">Accounts and billing are coming soon. Until then the full app is free to try in your browser.</p>
+</section>
+
+<footer class="site-foot"><span>© <span id="yr"></span> HerdLedger</span><span>Planning tool only, not financial advice. Futures and options trading involves risk.</span></footer>
+
+<script type="module">
+  import { PLANS, TRIAL_DAYS } from "./js/config.js";
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  document.getElementById("trial-line").textContent = `Every plan starts with a ${TRIAL_DAYS}-day free trial. Cancel anytime.`;
+  document.getElementById("plans").innerHTML = PLANS.map((p) => `
+    <div class="plan ${p.highlight ? "hl" : ""}">
+      ${p.highlight ? '<span class="ribbon">Most popular</span>' : ""}
+      <h3>${esc(p.name)}</h3><p class="muted">${esc(p.blurb)}</p>
+      <p class="price"><b>$${p.price.toFixed(2)}</b><span>/month</span></p>
+      <ul>${p.features.map((f) => `<li>${esc(f)}</li>`).join("")}</ul>
+      <button class="btn block ${p.highlight ? "primary" : ""}" disabled title="Billing launches soon">Start ${TRIAL_DAYS}-day trial · coming soon</button>
+      <a class="btn block ghost" href="app.html">Try the free demo</a>
+    </div>`).join("");
+  document.getElementById("yr").textContent = new Date().getFullYear();
+</script>
+</body></html>
